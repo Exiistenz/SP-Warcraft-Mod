@@ -33,6 +33,7 @@ def load_player_data(player):
     hero = manager.get_player_hero(player)
     if not hero:
         manager.add_player(player)
+        manager.connection.commit()
         hero = manager.get_player_hero(player)
     player.hero = Hero.get_subclass_dict()[hero]()
 
@@ -40,6 +41,7 @@ def load_hero_data(player):
     data = manager.get_player_hero_data(player)
     if not data:
         manager.add_hero(player, player.hero)
+        manager.connection.commit()
         data = (0, 0)
     player.hero.experience, player.hero.level = data
     for skill in player.hero.skills:
@@ -51,8 +53,10 @@ def load_hero_data(player):
 def save_player_data(player):
     manager.set_player_hero(player)
     manager.set_player_name(player)
+    manager.connection.commit()
 
 def save_hero_data(player):
     manager.set_player_hero_data(player, player.hero)
     for skill in player.hero.skills:
         manager.set_player_skill_level(player, player.hero, skill)
+    manager.connection.commit()
