@@ -32,7 +32,9 @@ def _on_spawn_message(event_data):
         load_player_data(player)
         load_hero_data(player)
 
-    player = players[event_data['userid']]
+    player = g_players[event_data['userid']]
+    all_weapons = set(weapon.name for weapon in WeaponClassIter())
+    player.unrestrict_weapons(*all_weapons)
 
 @Event('player_disconnect')
 def _on_disconnect_save_data(event_data):
