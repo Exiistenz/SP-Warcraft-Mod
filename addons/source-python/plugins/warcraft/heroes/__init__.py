@@ -5,6 +5,7 @@ from os.path import dirname, basename, isfile
 from glob import glob
 
 from ..debug import log
+from ..config import BASE_EXPERIENCE, ADDITION_EXPERIENCE
 
 ## ALL DECLARATION
 
@@ -96,7 +97,7 @@ class Hero:
         return self._level - sum(skill.level for skill in self.skills)
 
     def required_experience(self, level):
-        return 80 + (40 * self._level)
+        return BASE_EXPERIENCE + (ADDITION_EXPERIENCE * self._level)
 
     def give_experience(self, amount):
         if not isinstance(amount, int):
