@@ -62,3 +62,6 @@ def save_hero_data(player):
 
 def get_player_total_level(player):
     return manager.get_total_level(player)
+
+def get_rank_list():
+    return manager.get_rank_list()
